@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -52,9 +53,11 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
     };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col animate-fade-in font-poppins text-white p-4" 
-      style={{ background: 'linear-gradient(165deg, #3d0363, #d92d98, #fd9355)' }}
+    <div className="fixed inset-0 z-50 flex flex-col animate-fade-in font-poppins text-white p-4 bg-[#0088ff]" 
       aria-modal="true" role="dialog">
+      {/* Gradient Background matching reference */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0ea5e9] via-[#0284c7] to-[#0c4a6e] z-0"></div>
+
       <style>{`
         @keyframes fade-in {
           from { opacity: 0; }
@@ -72,26 +75,26 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
           </header>
 
           <main className="flex-grow overflow-y-auto py-4">
-              <div className="max-w-lg mx-auto bg-black/20 backdrop-blur-md rounded-2xl p-6 shadow-lg space-y-6">
+              <div className="max-w-lg mx-auto bg-[#082f49]/40 backdrop-blur-md rounded-2xl p-6 shadow-lg space-y-6 border border-[#38bdf8]/20">
                 <div className="space-y-3 text-white/90">
                     <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">1.</div>
+                        <div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">1.</div>
                         <p className="pt-1">{t('guideStep1')}</p>
                     </div>
                     <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">2.</div>
+                        <div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">2.</div>
                         <p className="pt-1">{t('guideStep2')}</p>
                     </div>
                     <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">3.</div>
+                        <div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">3.</div>
                         <p className="pt-1">{t('guideStep3')}</p>
                     </div>
                     <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">4.</div>
+                        <div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">4.</div>
                         <div className="flex-grow">
                           <p>{t('guideStep4')}</p>
-                          <div className="mt-2 flex items-center justify-between bg-black/30 p-2 rounded-md border border-white/20">
-                              <span className="font-mono text-lg text-pink-300 font-bold">{promoCode}</span>
+                          <div className="mt-2 flex items-center justify-between bg-[#083344]/60 p-2 rounded-md border border-[#38bdf8]/30">
+                              <span className="font-mono text-lg text-[#38bdf8] font-bold">{promoCode}</span>
                               <button onClick={handleCopy} className="p-1 text-gray-300 hover:text-white transition-colors" aria-label={t('copyPromocode')}>
                                   {copied ? <CheckIcon className="w-5 h-5 text-green-400" /> : <CopyIcon className="w-5 h-5" />}
                               </button>
@@ -105,10 +108,10 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
                 <div>
                     <h2 className="text-xl font-bold text-center text-white mb-4 uppercase">{t('howToFindPlayerId')}</h2>
                     <div className="space-y-3 text-white/90">
-                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">1.</div><p className="pt-1">{t('playerIdStep1')}</p></div>
-                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">2.</div><p className="pt-1">{t('playerIdStep2')}</p></div>
-                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">3.</div><p className="pt-1">{t('playerIdStep3')}</p></div>
-                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-pink-400 text-2xl">4.</div><p className="pt-1">{t('playerIdStep4')}</p></div>
+                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">1.</div><p className="pt-1">{t('playerIdStep1')}</p></div>
+                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">2.</div><p className="pt-1">{t('playerIdStep2')}</p></div>
+                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">3.</div><p className="pt-1">{t('playerIdStep3')}</p></div>
+                        <div className="flex items-start gap-4"><div className="flex-shrink-0 pt-1 font-bold text-[#38bdf8] text-2xl">4.</div><p className="pt-1">{t('playerIdStep4')}</p></div>
                     </div>
                 </div>
               </div>
@@ -117,7 +120,7 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
           <footer className="w-full flex items-center justify-center mt-auto flex-shrink-0 pb-4">
             <button
             onClick={onClose}
-            className="w-full max-w-xs py-3 bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white font-poppins font-bold text-lg uppercase rounded-full transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-black/30"
+            className="w-full max-w-xs py-3 bg-gradient-to-r from-[#4ade80] to-[#16a34a] text-[#064e3b] font-poppins font-bold text-lg uppercase rounded-full transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-black/30 border-b-4 border-[#14532d] active:border-b-0 active:translate-y-1"
             aria-label={t('closeGuide')}
             >
             {t('gotIt')}

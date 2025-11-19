@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { languages } from '../lib/i18n';
@@ -116,7 +117,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
             className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             onClick={onClose}
         />
-        <div className={`fixed top-0 left-0 h-full w-72 bg-black/40 backdrop-blur-2xl border-r border-white/10 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col`}>
+        <div className={`fixed top-0 left-0 h-full w-72 bg-[#082f49] border-r border-[#38bdf8]/20 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col`}>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -124,19 +125,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                 accept="image/*"
                 className="hidden"
             />
-            <div className="flex-shrink-0 bg-white/5 p-4 pt-6">
+            <div className="flex-shrink-0 bg-[#0c4a6e]/50 p-4 pt-6 border-b border-[#38bdf8]/10">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-3">
                         <button
                             onClick={handleProfilePicClick}
-                            className="w-12 h-12 flex-shrink-0 bg-black/20 border-2 border-white/30 rounded-full group relative disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-12 h-12 flex-shrink-0 bg-[#083344] border-2 border-[#38bdf8]/30 rounded-full group relative disabled:cursor-not-allowed flex items-center justify-center"
                             disabled={!isLoggedIn}
                             aria-label={t('changeProfilePic')}
                         >
                             {profilePic ? (
                                 <img src={profilePic} alt={t('profileAlt')} className="w-full h-full rounded-full object-cover" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                             ) : (
-                                <UserIcon className="w-8 h-8 text-white" />
+                                <UserIcon className="w-8 h-8 text-[#38bdf8]" />
                             )}
                             {isLoggedIn && (
                                 <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
@@ -146,7 +147,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                         </button>
                         <div>
                             <p className="font-bold text-lg text-white truncate max-w-40">{playerId ? t('welcomeUser', {playerId}) : t('welcome')}</p>
-                            <p className="text-sm text-white/80 font-poppins">Rocket Queen Predictor</p>
+                            <p className="text-sm text-[#38bdf8]/80 font-poppins">Mines Predictor Pro</p>
                         </div>
                     </div>
                     <button onClick={onClose} className="p-1 -mt-1 -mr-1 rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors">
@@ -161,12 +162,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                         onClick={() => onNavigate('predictor')}
                         disabled={!isLoggedIn}
                     >
-                        <HomeIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-pink-400 group-disabled:text-white/30"/>
+                        <HomeIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-[#38bdf8] group-disabled:text-white/30"/>
                         <span className="font-semibold">{t('predictorHome')}</span>
                     </NavButton>
 
                     <NavButton onClick={onTestPostbackClick}>
-                         <TestIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-pink-400 group-disabled:text-white/30"/>
+                         <TestIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-[#38bdf8] group-disabled:text-white/30"/>
                          <span className="font-semibold">{t('testPostback')}</span>
                     </NavButton>
 
@@ -177,20 +178,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                                 className="group flex w-full items-center justify-between gap-4 p-3 rounded-lg text-left text-white/80 hover:bg-white/10 hover:text-white transition-colors duration-200"
                             >
                                 <div className="flex items-center gap-4">
-                                    <LanguageIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-pink-400" />
+                                    <LanguageIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-[#38bdf8]" />
                                     <span className="font-semibold">{t('language')}</span>
                                 </div>
-                                <svg className={`w-5 h-5 text-white/50 transition-transform group-hover:text-pink-400 ${isLangMenuOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                <svg className={`w-5 h-5 text-white/50 transition-transform group-hover:text-[#38bdf8] ${isLangMenuOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
                             {isLangMenuOpen && (
-                                <div className="mt-2 ml-4 pl-4 border-l-2 border-white/20 max-h-60 overflow-y-auto">
+                                <div className="mt-2 ml-4 pl-4 border-l-2 border-[#38bdf8]/20 max-h-60 overflow-y-auto">
                                     {languages.map((lang) => (
                                         <button
                                             key={lang.code}
                                             onClick={() => handleLanguageSelect(lang.code)}
-                                            className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === lang.code ? 'bg-pink-500/20 text-pink-300 font-bold' : 'text-gray-300 hover:bg-white/10'}`}
+                                            className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === lang.code ? 'bg-[#0c4a6e]/50 text-[#38bdf8] font-bold' : 'text-gray-300 hover:bg-white/10'}`}
                                         >
                                             {lang.flag} {lang.name}
                                         </button>
@@ -202,12 +203,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                 </div>
             </nav>
             
-            <div className="p-2 border-t border-white/10 flex-shrink-0">
+            <div className="p-2 border-t border-[#38bdf8]/20 flex-shrink-0">
                 <div className="flex items-center justify-between">
                     <div>
                         {isLoggedIn && (
                              <NavButton onClick={onLogout}>
-                                <LogoutIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-pink-400 group-disabled:text-white/30"/>
+                                <LogoutIcon className="w-6 h-6 text-white/50 transition-colors group-hover:text-[#38bdf8] group-disabled:text-white/30"/>
                                 <span className="font-semibold">{t('logout')}</span>
                             </NavButton>
                         )}

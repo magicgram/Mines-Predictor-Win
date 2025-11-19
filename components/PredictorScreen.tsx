@@ -35,7 +35,7 @@ const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l1.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+    <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
   </svg>
 );
 
@@ -87,10 +87,12 @@ const LimitReachedView = React.memo(({ handleDepositRedirect }: { handleDepositR
 
   return (
      <div 
-        className="w-full h-screen flex flex-col font-poppins relative overflow-hidden items-center justify-center p-4"
-        style={{ background: 'linear-gradient(to bottom, #007bff, #001f3f)' }}
+        className="w-full h-screen flex flex-col font-poppins relative overflow-hidden items-center justify-center p-4 bg-[#0088ff]"
       >
-        <div className="w-full max-w-sm bg-black/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 text-center shadow-2xl">
+        {/* Gradient Background matching reference */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0ea5e9] via-[#0284c7] to-[#0c4a6e] z-0"></div>
+
+        <div className="w-full max-w-sm bg-[#082f49]/40 backdrop-blur-md rounded-2xl p-8 border border-[#38bdf8]/20 text-center shadow-2xl z-10">
             <h1 className="text-3xl font-russo uppercase text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
                 {t('reDepositMessageTitle')}
             </h1>
@@ -98,7 +100,7 @@ const LimitReachedView = React.memo(({ handleDepositRedirect }: { handleDepositR
             
             <button 
                 onClick={handleDepositRedirect}
-                className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-russo text-xl uppercase rounded-xl transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-green-900/30"
+                className="w-full py-4 bg-gradient-to-r from-[#4ade80] to-[#16a34a] text-[#064e3b] font-russo text-xl uppercase rounded-xl transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-green-900/30 border-b-4 border-[#14532d] active:border-b-0 active:translate-y-1"
             >
                 {t('depositNow')}
             </button>

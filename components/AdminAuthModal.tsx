@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -42,8 +43,8 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4" aria-modal="true" role="dialog">
-      <div className="w-full max-w-sm bg-black/30 backdrop-blur-xl border border-white/10 text-white rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl">
-        <h1 className="text-2xl font-russo text-center text-pink-400 mb-2 uppercase">{t('adminAccess')}</h1>
+      <div className="w-full max-w-sm bg-[#082f49]/90 backdrop-blur-xl border border-[#38bdf8]/20 text-white rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl">
+        <h1 className="text-2xl font-russo text-center text-[#38bdf8] mb-2 uppercase">{t('adminAccess')}</h1>
         <p className="text-center text-white/70 mb-6 font-poppins">{t('enterPasswordToAccessTestPage')}</p>
         
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -53,7 +54,7 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-3 bg-black/30 border border-white/20 text-white placeholder-gray-300 font-poppins text-base rounded-full focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+              className="w-full px-4 py-3 bg-[#083344]/60 border border-[#38bdf8]/30 text-white placeholder-gray-400 font-poppins text-base rounded-full focus:outline-none focus:ring-2 focus:ring-[#38bdf8] transition"
               autoFocus
             />
           </div>
@@ -75,7 +76,7 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
             <button
               type="submit"
               disabled={isLoading || !password}
-              className="py-3 bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white font-poppins font-bold text-lg uppercase rounded-full transition-all hover:brightness-110 active:scale-95 disabled:opacity-50 shadow-lg shadow-black/30"
+              className="py-3 bg-gradient-to-r from-[#4ade80] to-[#16a34a] text-[#064e3b] font-poppins font-bold text-lg uppercase rounded-full transition-all hover:brightness-110 active:scale-95 disabled:opacity-50 shadow-lg shadow-black/30 border-b-4 border-[#14532d] active:border-b-0 active:translate-y-1"
             >
               {isLoading ? t('verifying') : t('submit')}
             </button>

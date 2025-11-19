@@ -36,7 +36,7 @@ const CopyableUrl: React.FC<{ url: string }> = ({ url }) => {
 
     return (
         <div className="mt-2 flex items-center justify-between bg-black/30 p-2 rounded-md border border-white/20">
-            <code className="font-mono text-xs md:text-sm text-pink-300 break-all">{url}</code>
+            <code className="font-mono text-xs md:text-sm text-sky-300 break-all">{url}</code>
             <button onClick={handleCopy} className="p-1.5 text-gray-300 hover:text-white transition-colors flex-shrink-0" aria-label={t('copy')}>
                 {copied ? <CheckIcon className="w-5 h-5 text-green-400" /> : <CopyIcon className="w-5 h-5" />}
             </button>
@@ -59,7 +59,7 @@ const PostbackUrlComponent: React.FC<{
         <div className="space-y-2 text-sm text-white/80">
           {params.map(p => (
             <div key={p.key}>
-              <p><code className="text-xs bg-pink-500/20 text-pink-300 p-1 rounded">{p.key}</code>: {p.desc}</p>
+              <p><code className="text-xs bg-sky-500/20 text-sky-300 p-1 rounded">{p.key}</code>: {p.desc}</p>
             </div>
           ))}
         </div>
