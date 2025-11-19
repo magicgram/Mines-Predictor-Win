@@ -165,9 +165,8 @@ const PredictorView = React.memo((props: {
                                 key={index}
                                 className={`
                                     relative w-full h-full rounded-lg transition-all duration-300 flex items-center justify-center overflow-hidden
-                                    ${item === 'empty' || item === 'mine'
-                                        ? 'bg-[#0c4a6e] shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)] border border-[#38bdf8]/10 border-t-[#38bdf8]/30' 
-                                        : 'bg-[#083344] shadow-inner border border-[#38bdf8]/10'}
+                                    shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)] border border-[#38bdf8]/10 border-t-[#38bdf8]/30
+                                    ${item === 'star' ? 'bg-[#083344]' : 'bg-[#0c4a6e]'}
                                 `}
                             >
                                 {(item === 'empty' || item === 'mine') && (
