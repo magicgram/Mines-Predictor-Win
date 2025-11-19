@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import type { User } from '../types';
 import { usePrediction } from '../services/authService';
 import Sidebar from './Sidebar';
@@ -13,23 +13,23 @@ interface PredictorScreenProps {
   onLogout: () => void;
 }
 
-const MenuIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
-  </svg>
-);
-
 // --- Icons ---
 
-const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clipRule="evenodd" />
+const MenuIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
   </svg>
 );
 
 const GuideIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+  </svg>
+);
+
+const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.539 1.35 1.539 3.6 0 4.95l-.26.227c-.64.56-1.115 1.27-1.115 2.118v.5a.75.75 0 01-1.5 0v-.5c0-1.253.702-2.306 1.647-3.134l.26-.228c.89-.777.89-2.036 0-2.804zM12 15.75a.75.75 0 100 1.5.75.75 0 000-1.5z" clipRule="evenodd" />
+    <path fillRule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clipRule="evenodd" />
   </svg>
 );
 
@@ -39,59 +39,73 @@ const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
+// Custom Star Icon with Gradient
 const StarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="url(#starGradient)" className="w-8 h-8 drop-shadow-md">
+  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-xl filter">
     <defs>
-      <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FFD700" />
-        <stop offset="100%" stopColor="#FFA500" />
+      <linearGradient id="starGradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#fff7e6" />
+        <stop offset="1" stopColor="#ffd700" />
       </linearGradient>
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
     </defs>
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    <path 
+        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" 
+        fill="url(#starGradient)" 
+        stroke="#eab308" 
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+    />
   </svg>
 );
 
+// Custom "Boom" (Mine) Icon
 const MineIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-red-600 drop-shadow-md">
-    <circle cx="12" cy="12" r="10" fill="#222" />
-    <circle cx="12" cy="12" r="4" fill="#ff0000" />
-    <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93" stroke="#ff0000" strokeWidth="2" />
+  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-2 drop-shadow-2xl">
+    <circle cx="12" cy="12" r="10" fill="#1f2937" className="opacity-80" />
+    <circle cx="12" cy="12" r="8" fill="url(#bombGradient)" />
+    <defs>
+        <radialGradient id="bombGradient" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3">
+            <stop offset="0%" stopColor="#ef4444" />
+            <stop offset="100%" stopColor="#991b1b" />
+        </radialGradient>
+    </defs>
+    {/* Spikes/Explosion effect */}
+    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
+    {/* Shine */}
+    <circle cx="9" cy="9" r="2" fill="white" fillOpacity="0.4" />
   </svg>
 );
 
-
-// --- Sub-components ---
+// --- Limit Reached View ---
 
 const LimitReachedView = React.memo(({ handleDepositRedirect }: { handleDepositRedirect: () => void; }) => {
   const { t } = useLanguage();
-  const imgUrl = "https://i.postimg.cc/3N7cr754/Picsart-25-11-18-12-04-40-325.png";
 
   return (
      <div 
-        className="w-full h-screen text-white flex flex-col font-poppins relative overflow-hidden items-center justify-center p-4"
+        className="w-full h-screen flex flex-col font-poppins relative overflow-hidden items-center justify-center p-4"
         style={{ background: 'linear-gradient(to bottom, #007bff, #001f3f)' }}
       >
-        <main className="flex flex-col items-center justify-center w-full max-w-sm text-center z-20">
-          <div className="w-full bg-black/40 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/10">
-              <h1 className="text-3xl font-russo uppercase text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
-                  {t('reDepositMessageTitle')}
-              </h1>
-              <p className="mt-4 max-w-sm text-white/80 font-poppins text-sm">{t('limitReachedText')}</p>
-              
-              <div className="w-full mt-8">
-                  <button 
-                      onClick={handleDepositRedirect}
-                      className="w-full py-3 bg-gradient-to-r from-green-500 to-green-700 text-white font-poppins font-bold text-lg uppercase rounded-xl transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-black/30"
-                  >
-                      {t('depositNow')}
-                  </button>
-              </div>
-          </div>
-        </main>
+        <div className="w-full max-w-sm bg-black/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 text-center shadow-2xl">
+            <h1 className="text-3xl font-russo uppercase text-white mb-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+                {t('reDepositMessageTitle')}
+            </h1>
+            <p className="text-white/90 font-poppins text-sm leading-relaxed mb-8">{t('limitReachedText')}</p>
+            
+            <button 
+                onClick={handleDepositRedirect}
+                className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-russo text-xl uppercase rounded-xl transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-green-900/30"
+            >
+                {t('depositNow')}
+            </button>
+        </div>
     </div>
   );
 });
-
 
 type GridItemType = 'empty' | 'star' | 'mine';
 
@@ -101,95 +115,92 @@ const PredictorView = React.memo((props: {
     gridState: GridItemType[];
     selectedTraps: number;
     setSelectedTraps: (val: number) => void;
-    isSignalActive: boolean;
+    isSignalActive: boolean; // True means signal is shown (Get Signal LOCKED, Refresh UNLOCKED)
     onGetSignal: () => void;
     onRefresh: () => void;
     confidence: number | null;
     isLoading: boolean;
 }) => {
-    // The Mines Grid
-    const renderGrid = () => {
-        return (
-            <div className="grid grid-cols-5 gap-2 p-4 bg-[#0b2138]/50 rounded-xl border border-white/5 shadow-inner max-w-[340px] mx-auto">
-                {props.gridState.map((item, index) => (
-                    <div 
-                        key={index}
-                        className={`
-                            aspect-square rounded-lg flex items-center justify-center relative overflow-hidden shadow-lg transition-all duration-300
-                            ${item === 'empty' 
-                                ? 'bg-[#0d3b5e] hover:bg-[#114872] border-b-4 border-[#06253d]' 
-                                : 'bg-[#092c47] border border-white/10'}
-                        `}
-                    >
-                        {item === 'empty' && (
-                            <div className="w-3 h-3 rounded-full bg-[#1e5c8a] shadow-inner" />
-                        )}
-                        
-                        {/* Revealed Icons with animation */}
-                        {item === 'star' && (
-                            <div className="animate-pop-in">
-                                <StarIcon />
-                            </div>
-                        )}
-                        {item === 'mine' && (
-                            <div className="animate-pop-in">
-                                <MineIcon />
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-        );
-    };
-
     return (
-        <div className="w-full min-h-screen text-white flex flex-col font-poppins relative overflow-hidden"
-             style={{ background: 'linear-gradient(180deg, #2b8cff 0%, #0052cc 50%, #001f3f 100%)' }}
-        >
+        <div className="w-full min-h-screen flex flex-col relative font-poppins overflow-hidden bg-[#0088ff]">
+            {/* Gradient Background matching reference */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0ea5e9] via-[#0284c7] to-[#0c4a6e] z-0"></div>
+
             {/* Top Bar */}
-            <header className="w-full flex justify-between items-center p-4 z-20">
-                <div className="w-10"></div> {/* Spacer */}
-                <h1 className="text-3xl font-black text-center tracking-wider uppercase text-[#0b2138] opacity-40 absolute left-1/2 -translate-x-1/2 pointer-events-none">
-                    MINES
-                </h1>
+            <header className="w-full flex justify-between items-start p-5 z-10">
+                 {/* Menu Button (Left in some designs, but keeping consistent with user request 'top right') */}
+                <div className="flex-1"></div>
+                
+                {/* Guide and Menu (Top Right as requested) */}
                 <div className="flex items-center gap-3">
-                    <button onClick={props.onOpenGuide} className="p-2 rounded-full bg-black/20 hover:bg-black/30 transition">
-                        <GuideIcon className="w-6 h-6" />
+                    <button onClick={props.onOpenGuide} className="p-2 rounded-full bg-black/20 text-white hover:bg-black/30 transition active:scale-90">
+                        <GuideIcon className="w-7 h-7 drop-shadow-md" />
                     </button>
-                    <button onClick={props.onOpenSidebar} className="p-2 rounded-full bg-black/20 hover:bg-black/30 transition">
-                        <MenuIcon className="w-6 h-6" />
+                    <button onClick={props.onOpenSidebar} className="p-2 rounded-full bg-black/20 text-white hover:bg-black/30 transition active:scale-90">
+                        <MenuIcon className="w-7 h-7 drop-shadow-md" />
                     </button>
                 </div>
             </header>
 
-            <main className="flex-grow flex flex-col items-center justify-center px-4 pb-6 space-y-6 z-10">
+            <main className="flex-grow flex flex-col items-center w-full max-w-md mx-auto px-4 z-10 relative -mt-8">
                 
-                {/* Animated Title */}
-                <div className="text-center mb-2">
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-[#0b2138] tracking-tighter leading-none animate-pulse-slow opacity-90">
+                {/* Title Area with Animation */}
+                <div className="mb-6 text-center">
+                    <h2 className="font-black text-4xl md:text-5xl text-[#0c4a6e] opacity-30 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 select-none blur-[1px]">
                         MINES
-                        <span className="block text-2xl md:text-3xl text-white drop-shadow-lg mt-[-5px]">
-                             PREDICTOR PRO
-                        </span>
                     </h2>
+                    <h1 className="relative font-russo text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] to-[#cceeff] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] tracking-wide animate-pulse-slow text-center leading-tight">
+                        MINES<br/>
+                        <span className="text-3xl md:text-4xl">PREDICTOR PRO</span>
+                    </h1>
                 </div>
 
                 {/* 5x5 Grid */}
-                {renderGrid()}
+                <div className="bg-[#082f49]/40 p-3 rounded-2xl border border-[#bae6fd]/20 shadow-2xl backdrop-blur-sm w-full aspect-square max-w-[360px] mb-6">
+                    <div className="grid grid-cols-5 gap-2 w-full h-full">
+                        {props.gridState.map((item, index) => (
+                            <div 
+                                key={index}
+                                className={`
+                                    relative w-full h-full rounded-lg transition-all duration-300 flex items-center justify-center overflow-hidden
+                                    ${item === 'empty' 
+                                        ? 'bg-[#0c4a6e] shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)] border-t border-[#38bdf8]/30' 
+                                        : 'bg-[#083344] shadow-inner border border-[#38bdf8]/10'}
+                                `}
+                            >
+                                {item === 'empty' && (
+                                    <div className="w-3 h-3 rounded-full bg-[#0ea5e9]/40 shadow-inner"></div>
+                                )}
+                                
+                                {item === 'star' && (
+                                    <div className="w-full h-full p-1 animate-pop-in">
+                                        <StarIcon />
+                                    </div>
+                                )}
+                                
+                                {item === 'mine' && (
+                                    <div className="w-full h-full p-1 animate-pop-in">
+                                        <MineIcon />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                {/* Trap Selection Pills */}
-                <div className="flex gap-3 justify-center w-full max-w-xs">
-                    {[1, 3, 5].map(traps => (
+                {/* Trap Selection Buttons */}
+                <div className="flex justify-between w-full max-w-[360px] gap-3 mb-5">
+                    {[1, 3, 5].map((traps) => (
                         <button
                             key={traps}
                             onClick={() => !props.isSignalActive && props.setSelectedTraps(traps)}
                             disabled={props.isSignalActive}
                             className={`
-                                flex-1 py-2 px-4 rounded-full font-bold text-sm transition-all duration-200 border-2
+                                flex-1 py-2.5 rounded-full font-russo text-sm md:text-base tracking-wider transition-all duration-200 border
                                 ${props.selectedTraps === traps 
-                                    ? 'bg-[#007bff] border-white text-white shadow-[0_0_15px_rgba(0,123,255,0.6)] scale-105' 
-                                    : 'bg-[#002a4d] border-[#004080] text-gray-400 hover:bg-[#003366]'}
-                                ${props.isSignalActive ? 'opacity-50 cursor-not-allowed' : ''}
+                                    ? 'bg-[#0ea5e9] border-white/50 text-white shadow-[0_0_15px_rgba(14,165,233,0.6)] scale-105' 
+                                    : 'bg-[#0c4a6e] border-[#075985] text-gray-400 hover:bg-[#0f5c85]'}
+                                ${props.isSignalActive ? 'opacity-50 cursor-not-allowed' : 'active:scale-95'}
                             `}
                         >
                             {traps} TRAPS
@@ -197,68 +208,71 @@ const PredictorView = React.memo((props: {
                     ))}
                 </div>
 
-                {/* Controls Area */}
-                <div className="w-full max-w-xs space-y-4">
-                    
-                    {/* Action Buttons Row */}
-                    <div className="flex items-center gap-3">
-                        {/* Refresh Button - Only active when signal is active */}
-                        <button 
-                            onClick={props.onRefresh}
-                            disabled={!props.isSignalActive}
-                            className={`
-                                p-4 rounded-2xl border-b-4 transition-all active:scale-95 flex items-center justify-center aspect-square h-[60px]
-                                ${props.isSignalActive 
-                                    ? 'bg-[#1a5cff] border-[#003cc5] text-white shadow-lg cursor-pointer hover:brightness-110' 
-                                    : 'bg-[#0a1f33] border-[#05101a] text-gray-600 cursor-not-allowed'}
-                            `}
-                        >
-                            <RefreshIcon className={`w-7 h-7 ${props.isSignalActive ? 'animate-spin-once' : ''}`} />
-                        </button>
+                {/* Controls */}
+                <div className="w-full max-w-[360px] flex gap-3 mb-5 h-[64px]">
+                    {/* Refresh Button */}
+                    <button
+                        onClick={props.onRefresh}
+                        disabled={!props.isSignalActive} // Only enabled when signal is showing
+                        className={`
+                            h-full aspect-square rounded-2xl flex items-center justify-center border-b-4 transition-all
+                            ${props.isSignalActive 
+                                ? 'bg-[#3b82f6] border-[#1d4ed8] text-white shadow-lg active:border-b-0 active:translate-y-1 hover:brightness-110 cursor-pointer' 
+                                : 'bg-[#1e293b] border-[#0f172a] text-gray-600 cursor-not-allowed'}
+                        `}
+                    >
+                        <RefreshIcon className={`w-8 h-8 ${props.isSignalActive ? 'animate-spin-once' : ''}`} />
+                    </button>
 
-                        {/* Get Signal Button - Only active when signal is NOT active */}
-                        <button 
-                            onClick={props.onGetSignal}
-                            disabled={props.isSignalActive || props.isLoading}
-                            className={`
-                                flex-1 h-[60px] rounded-2xl border-b-4 font-black text-xl tracking-wide flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg uppercase
-                                ${!props.isSignalActive && !props.isLoading
-                                    ? 'bg-gradient-to-r from-[#4caf50] to-[#2e7d32] border-[#1b5e20] text-white hover:brightness-110' 
-                                    : 'bg-[#1a2e3b] border-[#0f1b24] text-gray-500 cursor-not-allowed'}
-                            `}
-                        >
-                            {props.isLoading ? (
-                                <span className="animate-pulse">...</span>
-                            ) : (
-                                <>
-                                    <PlayIcon className="w-6 h-6 fill-current" />
-                                    GET SIGNAL
-                                </>
-                            )}
-                        </button>
-                    </div>
-
-                    {/* Confidence Bar */}
-                    <div className="w-full py-3 bg-[#004e92] rounded-full border border-[#007bff]/30 shadow-lg text-center">
-                        <p className="text-white font-bold text-lg tracking-wider drop-shadow-sm">
-                            CONFIDENCE: <span className="text-[#4fffa6]">{props.confidence ? `${props.confidence}%` : '--%'}</span>
-                        </p>
-                    </div>
+                    {/* Get Signal Button */}
+                    <button
+                        onClick={props.onGetSignal}
+                        disabled={props.isSignalActive || props.isLoading} // Locked when signal is active or loading
+                        className={`
+                            flex-1 h-full rounded-2xl flex items-center justify-center gap-2 font-russo text-2xl tracking-wide border-b-4 transition-all shadow-xl
+                            ${!props.isSignalActive && !props.isLoading
+                                ? 'bg-gradient-to-r from-[#4ade80] to-[#16a34a] border-[#14532d] text-[#064e3b] hover:brightness-110 active:border-b-0 active:translate-y-1'
+                                : 'bg-[#1e293b] border-[#0f172a] text-gray-500 cursor-not-allowed'}
+                        `}
+                    >
+                        {props.isLoading ? (
+                            <div className="flex space-x-1">
+                                <div className="w-3 h-3 bg-current rounded-full animate-bounce delay-0"></div>
+                                <div className="w-3 h-3 bg-current rounded-full animate-bounce delay-150"></div>
+                                <div className="w-3 h-3 bg-current rounded-full animate-bounce delay-300"></div>
+                            </div>
+                        ) : (
+                            <>
+                                <PlayIcon className="w-8 h-8" />
+                                GET SIGNAL
+                            </>
+                        )}
+                    </button>
                 </div>
+
+                {/* Confidence Meter */}
+                <div className="w-full max-w-[360px] bg-[#0c4a6e]/80 backdrop-blur rounded-xl border border-[#38bdf8]/30 py-3 px-6 text-center shadow-lg">
+                    <p className="font-russo text-lg text-white tracking-widest">
+                        CONFIDENCE:- <span className="text-[#4ade80] text-xl filter drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]">
+                            {props.confidence ? `${props.confidence}%` : '--%'}
+                        </span>
+                    </p>
+                </div>
+
             </main>
             
             <style>{`
                 @keyframes pop-in {
                     0% { transform: scale(0); opacity: 0; }
-                    80% { transform: scale(1.1); opacity: 1; }
+                    60% { transform: scale(1.2); opacity: 1; }
                     100% { transform: scale(1); }
                 }
                 .animate-pop-in {
-                    animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                    animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
                 }
                 @keyframes pulse-slow {
-                    0%, 100% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.8; transform: scale(0.98); }
+                    0%, 100% { transform: scale(1); filter: brightness(1); }
+                    50% { transform: scale(1.02); filter: brightness(1.1); }
                 }
                 .animate-pulse-slow {
                     animation: pulse-slow 3s infinite ease-in-out;
@@ -275,7 +289,6 @@ const PredictorView = React.memo((props: {
     );
 });
 
-
 const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => {
   const [predictionsLeft, setPredictionsLeft] = useState(user.predictionsLeft);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -285,7 +298,7 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   const { t } = useLanguage();
 
   // Mines Specific State
-  const [selectedTraps, setSelectedTraps] = useState(3);
+  const [selectedTraps, setSelectedTraps] = useState<number>(1); // Default to 1 trap
   const [gridState, setGridState] = useState<GridItemType[]>(Array(25).fill('empty'));
   const [isSignalActive, setIsSignalActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -323,35 +336,36 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
       setPredictionsLeft(prev => prev - 1);
 
       // 2. Generate Grid Logic
-      // We need to place N mines (where N = selectedTraps)
-      // The rest are stars.
-      // Create an array of indices [0...24]
-      const allIndices = Array.from({ length: 25 }, (_, i) => i);
+      // Random 70-99% confidence
+      const randomConfidence = Math.floor(Math.random() * (99 - 70 + 1)) + 70;
+
+      // Grid Generation
+      // We need exactly `selectedTraps` mines. The rest are stars.
+      const totalCells = 25;
+      const numberOfMines = selectedTraps;
       
-      // Shuffle indices to pick random spots for mines
+      const allIndices = Array.from({ length: totalCells }, (_, i) => i);
+      
+      // Shuffle indices securely
       for (let i = allIndices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [allIndices[i], allIndices[j]] = [allIndices[j], allIndices[i]];
       }
 
-      const mineIndices = allIndices.slice(0, selectedTraps);
+      const mineIndices = allIndices.slice(0, numberOfMines);
       
-      // Construct the new grid
-      const newGrid: GridItemType[] = Array(25).fill('empty').map((_, index) => {
-        if (mineIndices.includes(index)) return 'mine';
-        return 'star';
+      const newGrid: GridItemType[] = Array(totalCells).fill('empty').map((_, index) => {
+        if (mineIndices.includes(index)) return 'mine'; // Boom
+        return 'star'; // Rest are stars
       });
 
-      // 3. Generate Confidence
-      const randomConfidence = Math.floor(Math.random() * (99 - 70 + 1)) + 70;
-
-      // Simulate a short delay for effect
+      // Simulate network delay for realism
       setTimeout(() => {
           setGridState(newGrid);
           setConfidence(randomConfidence);
-          setIsSignalActive(true); // Locks Get Signal, Unlocks Refresh
+          setIsSignalActive(true); // This locks Get Signal and unlocks Refresh
           setIsLoading(false);
-      }, 800); // 0.8s delay
+      }, 600);
 
     } catch (error) {
        console.error("Failed to get signal:", error);
@@ -363,7 +377,7 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   // Logic to reset the grid (Refresh button)
   const handleRefresh = useCallback(() => {
     setGridState(Array(25).fill('empty'));
-    setIsSignalActive(false);
+    setIsSignalActive(false); // This unlocks Get Signal and locks Refresh
     setConfidence(null);
   }, []);
 
@@ -387,7 +401,7 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   }, [t]);
   
   const handleCloseSidebar = useCallback(() => setIsSidebarOpen(false), []);
-  const handleNavigate = useCallback((view) => { setCurrentView(view); setIsSidebarOpen(false); }, []);
+  const handleNavigate = useCallback((view: string) => { setCurrentView(view); setIsSidebarOpen(false); }, []);
   const handleTestPostbackClick = useCallback(() => { setIsSidebarOpen(false); setShowAdminModal(true); }, []);
   const handleAdminSuccess = useCallback(() => { setShowAdminModal(false); setCurrentView('testPostback'); }, []);
   const handleAdminClose = useCallback(() => setShowAdminModal(false), []);
@@ -398,7 +412,7 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   }
   
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen bg-gray-900">
       {isGuideOpen && <GuideModal onClose={() => setIsGuideOpen(false)} />}
       {showAdminModal && <AdminAuthModal onSuccess={handleAdminSuccess} onClose={handleAdminClose} />}
       <Sidebar 
