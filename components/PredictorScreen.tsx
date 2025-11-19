@@ -39,38 +39,14 @@ const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-// Custom Star Icon - Updated to White for better visibility on Orange background
+// Custom Star Icon - Updated to White Solid for better visibility and clean look
 const StarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-md filter">
-    <defs>
-      <linearGradient id="starGradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#ffffff" />
-        <stop offset="1" stopColor="#fff7ed" />
-      </linearGradient>
-    </defs>
+  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-sm">
     <path 
         d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" 
-        fill="url(#starGradient)" 
+        fill="#ffffff" 
         stroke="none"
     />
-  </svg>
-);
-
-// Custom "Boom" (Mine) Icon - KEEPING COMPONENT FOR CODE SAFETY BUT NOT USING IT VISUALLY
-const MineIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-2 drop-shadow-2xl">
-    <circle cx="12" cy="12" r="10" fill="#1f2937" className="opacity-80" />
-    <circle cx="12" cy="12" r="8" fill="url(#bombGradient)" />
-    <defs>
-        <radialGradient id="bombGradient" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3">
-            <stop offset="0%" stopColor="#ef4444" />
-            <stop offset="100%" stopColor="#991b1b" />
-        </radialGradient>
-    </defs>
-    {/* Spikes/Explosion effect */}
-    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
-    {/* Shine */}
-    <circle cx="9" cy="9" r="2" fill="white" fillOpacity="0.4" />
   </svg>
 );
 
@@ -158,12 +134,11 @@ const PredictorView = React.memo((props: {
                             <div 
                                 key={index}
                                 className={`
-                                    relative w-full h-full rounded-lg transition-all duration-300 flex items-center justify-center overflow-hidden
-                                    shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)]
-                                    border
+                                    relative w-full h-full rounded-lg transition-colors duration-300 flex items-center justify-center overflow-hidden
+                                    border-t border-l border-r border-b-[4px]
                                     ${item === 'star' 
-                                        ? 'bg-gradient-to-b from-[#fbbf24] to-[#f59e0b] border-[#fcd34d]/50 border-t-[#ffffff]/40' 
-                                        : 'bg-[#0c4a6e] border-[#38bdf8]/10 border-t-[#38bdf8]/30'
+                                        ? 'bg-gradient-to-b from-[#fbbf24] to-[#f59e0b] border-t-[#ffffff]/50 border-l-[#fcd34d] border-r-[#fcd34d] border-b-[#b45309]' 
+                                        : 'bg-[#0c4a6e] border-t-[#38bdf8]/30 border-l-[#38bdf8]/10 border-r-[#38bdf8]/10 border-b-[#062c44]'
                                     }
                                 `}
                             >
@@ -172,7 +147,7 @@ const PredictorView = React.memo((props: {
                                 )}
                                 
                                 {item === 'star' && (
-                                    <div className="w-full h-full p-1 animate-pop-in">
+                                    <div className="w-full h-full p-0.5 animate-pop-in">
                                         <StarIcon />
                                     </div>
                                 )}
