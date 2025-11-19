@@ -39,25 +39,19 @@ const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-// Custom Star Icon with Gradient
+// Custom Star Icon - Updated to White for better visibility on Orange background
 const StarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-xl filter">
+  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-md filter">
     <defs>
       <linearGradient id="starGradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#fff7e6" />
-        <stop offset="1" stopColor="#ffd700" />
+        <stop stopColor="#ffffff" />
+        <stop offset="1" stopColor="#fff7ed" />
       </linearGradient>
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="2" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
     </defs>
     <path 
         d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" 
         fill="url(#starGradient)" 
-        stroke="#eab308" 
-        strokeWidth="1.5" 
-        strokeLinejoin="round"
+        stroke="none"
     />
   </svg>
 );
@@ -165,8 +159,12 @@ const PredictorView = React.memo((props: {
                                 key={index}
                                 className={`
                                     relative w-full h-full rounded-lg transition-all duration-300 flex items-center justify-center overflow-hidden
-                                    shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)] border border-[#38bdf8]/10 border-t-[#38bdf8]/30
-                                    ${item === 'star' ? 'bg-[#083344]' : 'bg-[#0c4a6e]'}
+                                    shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)]
+                                    border
+                                    ${item === 'star' 
+                                        ? 'bg-gradient-to-b from-[#fbbf24] to-[#f59e0b] border-[#fcd34d]/50 border-t-[#ffffff]/40' 
+                                        : 'bg-[#0c4a6e] border-[#38bdf8]/10 border-t-[#38bdf8]/30'
+                                    }
                                 `}
                             >
                                 {(item === 'empty' || item === 'mine') && (
