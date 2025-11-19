@@ -35,7 +35,7 @@ const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+    <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l1.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
   </svg>
 );
 
@@ -62,7 +62,7 @@ const StarIcon = () => (
   </svg>
 );
 
-// Custom "Boom" (Mine) Icon
+// Custom "Boom" (Mine) Icon - KEEPING COMPONENT FOR CODE SAFETY BUT NOT USING IT VISUALLY
 const MineIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-2 drop-shadow-2xl">
     <circle cx="12" cy="12" r="10" fill="#1f2937" className="opacity-80" />
@@ -163,24 +163,18 @@ const PredictorView = React.memo((props: {
                                 key={index}
                                 className={`
                                     relative w-full h-full rounded-lg transition-all duration-300 flex items-center justify-center overflow-hidden
-                                    ${item === 'empty' 
+                                    ${item === 'empty' || item === 'mine'
                                         ? 'bg-[#0c4a6e] shadow-[inset_0_-4px_0_rgba(0,0,0,0.3)] border-t border-[#38bdf8]/30' 
                                         : 'bg-[#083344] shadow-inner border border-[#38bdf8]/10'}
                                 `}
                             >
-                                {item === 'empty' && (
+                                {(item === 'empty' || item === 'mine') && (
                                     <div className="w-3 h-3 rounded-full bg-[#0ea5e9]/40 shadow-inner"></div>
                                 )}
                                 
                                 {item === 'star' && (
                                     <div className="w-full h-full p-1 animate-pop-in">
                                         <StarIcon />
-                                    </div>
-                                )}
-                                
-                                {item === 'mine' && (
-                                    <div className="w-full h-full p-1 animate-pop-in">
-                                        <MineIcon />
                                     </div>
                                 )}
                             </div>
