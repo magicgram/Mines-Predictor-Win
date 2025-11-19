@@ -39,9 +39,9 @@ const PlayIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-// Custom Star Icon - Updated to White Solid for better visibility and clean look
+// Custom Star Icon - Updated to remove padding so container controls size
 const StarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full p-1.5 drop-shadow-sm">
+  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full drop-shadow-sm">
     <path 
         d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" 
         fill="#ffffff" 
@@ -134,8 +134,8 @@ const PredictorView = React.memo((props: {
                             <div 
                                 key={index}
                                 className={`
-                                    relative w-full h-full rounded-lg transition-colors duration-300 flex items-center justify-center overflow-hidden
-                                    border-t border-l border-r border-b-[4px]
+                                    relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden
+                                    border-t-[1px] border-l-[1px] border-r-[1px] border-b-[4px]
                                     ${item === 'star' 
                                         ? 'bg-gradient-to-b from-[#fbbf24] to-[#f59e0b] border-t-[#ffffff]/50 border-l-[#fcd34d] border-r-[#fcd34d] border-b-[#b45309]' 
                                         : 'bg-[#0c4a6e] border-t-[#38bdf8]/30 border-l-[#38bdf8]/10 border-r-[#38bdf8]/10 border-b-[#062c44]'
@@ -147,7 +147,7 @@ const PredictorView = React.memo((props: {
                                 )}
                                 
                                 {item === 'star' && (
-                                    <div className="w-full h-full p-0.5 animate-pop-in">
+                                    <div className="w-[65%] h-[65%] flex items-center justify-center animate-pop-in">
                                         <StarIcon />
                                     </div>
                                 )}
