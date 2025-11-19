@@ -334,26 +334,56 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
       // 2. Generate Grid Logic
       // Random 70-99% confidence
       const randomConfidence = Math.floor(Math.random() * (99 - 70 + 1)) + 70;
-
-      // Grid Generation
-      // We need exactly `selectedTraps` mines. The rest are stars.
       const totalCells = 25;
-      const numberOfMines = selectedTraps;
-      
-      const allIndices = Array.from({ length: totalCells }, (_, i) => i);
-      
-      // Shuffle indices securely
-      for (let i = allIndices.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [allIndices[i], allIndices[j]] = [allIndices[j], allIndices[i]];
-      }
+      let newGrid: GridItemType[] = Array(totalCells).fill('empty');
 
-      const mineIndices = allIndices.slice(0, numberOfMines);
-      
-      const newGrid: GridItemType[] = Array(totalCells).fill('empty').map((_, index) => {
-        if (mineIndices.includes(index)) return 'mine'; // Boom
-        return 'star'; // Rest are stars
-      });
+      if (selectedTraps === 1) {
+        // Special logic for 1 Trap: Reveal 5 specific cells based on predefined patterns
+        // Patterns derived from user input (emoji grids)
+        const patterns = [
+          [4, 8, 10, 16, 24],
+          [5, 7, 11, 16, 18],
+          [8, 11, 14, 15, 19],
+          [0, 5, 15, 20, 23],
+          [2, 6, 8, 10, 17],
+          [1, 6, 11, 13, 15],
+          [1, 2, 14, 20, 22],
+          [3, 5, 6, 9, 18],
+          [0, 3, 5, 7, 16],
+          [3, 17, 20, 22, 23],
+          [0, 7, 10, 17, 20],
+          [0, 6, 15, 16, 19],
+          [0, 3, 15, 17, 20],
+          [6, 17, 20, 22, 23],
+          [2, 7, 10, 16, 21]
+        ];
+        
+        const randomPatternIndex = Math.floor(Math.random() * patterns.length);
+        const selectedPattern = patterns[randomPatternIndex];
+        
+        newGrid = newGrid.map((_, index) => {
+          if (selectedPattern.includes(index)) return 'star';
+          return 'empty';
+        });
+
+      } else {
+        // Existing logic for other trap counts (3, 5, etc.)
+        const numberOfMines = selectedTraps;
+        const allIndices = Array.from({ length: totalCells }, (_, i) => i);
+        
+        // Shuffle indices securely
+        for (let i = allIndices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [allIndices[i], allIndices[j]] = [allIndices[j], allIndices[i]];
+        }
+
+        const mineIndices = allIndices.slice(0, numberOfMines);
+        
+        newGrid = newGrid.map((_, index) => {
+          if (mineIndices.includes(index)) return 'mine'; // Boom
+          return 'star'; // Rest are stars
+        });
+      }
 
       // Simulate network delay for realism
       setTimeout(() => {
