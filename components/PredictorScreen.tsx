@@ -129,7 +129,7 @@ const PredictorView = React.memo((props: {
 
                 {/* 5x5 Grid */}
                 <div className="bg-[#082f49]/40 p-3 rounded-2xl border border-[#bae6fd]/20 shadow-2xl backdrop-blur-sm w-full aspect-square max-w-[360px] mb-6">
-                    <div className="grid grid-cols-5 gap-2 w-full h-full">
+                    <div className="grid grid-cols-5 grid-rows-5 gap-2 w-full h-full">
                         {props.gridState.map((item, index) => (
                             <div 
                                 key={index}
